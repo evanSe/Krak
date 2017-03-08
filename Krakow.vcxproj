@@ -21,10 +21,23 @@
   <ItemGroup>
     <ClCompile Include="src\engine\engine.cpp" />
     <ClCompile Include="src\engine\pch.cpp" />
+    <ClCompile Include="src\engine\ultils\buffer.h" />
+    <ClCompile Include="src\engine\window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine\engine.h" />
     <ClInclude Include="src\engine\pch.h" />
+    <ClInclude Include="src\engine\ultils\comandPool.h" />
+    <ClInclude Include="src\engine\ultils\commandBuffer.h" />
+    <ClInclude Include="src\engine\ultils\frameBuffer.h" />
+    <ClInclude Include="src\engine\ultils\image.h" />
+    <ClInclude Include="src\engine\ultils\mesh.h" />
+    <ClInclude Include="src\engine\ultils\pipeline.h" />
+    <ClInclude Include="src\engine\ultils\queue.h" />
+    <ClInclude Include="src\engine\ultils\renderPass.h" />
+    <ClInclude Include="src\engine\ultils\renderPassHelper.h" />
+    <ClInclude Include="src\engine\ultils\swapChain.h" />
+    <ClInclude Include="src\engine\ultils\texture.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -97,11 +110,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\seawa\Desktop\libaries\glm;C:\Users\seawa\Desktop\libaries\glfw-3.2.1.bin.WIN32\include;C:\VulkanSDK\1.0.39.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Evan\Desktop\Development\Krak\dependency\glm;C:\Users\Evan\Desktop\Development\Krak\dependency\glfw-3.2.1.bin.WIN64\include;C:\Users\Evan\Desktop\Development\Krak\dependency\VulkanLunar\1.0.42.0\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\Users\seawa\Desktop\libaries\glfw-3.2.1.bin.WIN32\lib-vc2015;C:\VulkanSDK\1.0.39.1\Bin32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Evan\Desktop\Development\Krak\dependency\glfw-3.2.1.bin.WIN64\lib-vc2015;C:\Users\Evan\Desktop\Development\Krak\dependency\VulkanLunar\1.0.42.0\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -112,11 +125,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\seawa\Desktop\libaries\glm;C:\Users\seawa\Desktop\libaries\glfw-3.2.1.bin.WIN32\include;C:\VulkanSDK\1.0.39.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Evan\Desktop\Development\Krak\dependency\glm;C:\Users\Evan\Desktop\Development\Krak\dependency\glfw-3.2.1.bin.WIN64\include;C:\Users\Evan\Desktop\Development\Krak\dependency\VulkanLunar\1.0.42.0\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\Users\seawa\Desktop\libaries\glfw-3.2.1.bin.WIN32\lib-vc2015;C:\VulkanSDK\1.0.39.1\Bin32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Evan\Desktop\Development\Krak\dependency\glfw-3.2.1.bin.WIN64\lib-vc2015;C:\Users\Evan\Desktop\Development\Krak\dependency\VulkanLunar\1.0.42.0\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

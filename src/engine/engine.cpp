@@ -35,6 +35,8 @@ game_state interpolate(game_state const & current, game_state const & previous, 
 }
 
 int main() {
+
+	// init GLFW
 	GLFWwindow* window;
 	glfwInit();
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
@@ -77,7 +79,8 @@ int main() {
 			quit_game = true;
 		}
 	}
-	glfwDestroyWindow(window);
 
+	// when main loop exits, destroy window then terminate
+	glfwDestroyWindow(window);
 	glfwTerminate();
 }

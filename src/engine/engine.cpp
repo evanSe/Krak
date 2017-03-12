@@ -1,11 +1,13 @@
 #include "pch.h"
 #include "engine.h"
 #include <chrono>
-
+#include "./ultils/instance.h"
 using namespace std::chrono_literals;
 
 // we use a fixed timestep of 1 / (60 fps) = 16 milliseconds
 constexpr std::chrono::nanoseconds timestep(16ms);
+
+
 
 struct game_state {
 	// this contains the state of your game, such as positions and velocities
@@ -34,13 +36,25 @@ game_state interpolate(game_state const & current, game_state const & previous, 
 	return interpolated_state;
 }
 
+static const uint32_t width = 800;
+static const uint32_t height = 800;
+
 int main() {
 
-	// init GLFW
-	GLFWwindow* window;
-	glfwInit();
-	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-	window = glfwCreateWindow(800, 600, "Krakow", nullptr, nullptr);
+	engine app;
+	try {
+		app.initWindow();
+		app.engineLoop();
+		app.initVulkan();
+	}
+	catch (const std::runtime_error& e) {
+		std::cerr << e.what() << std::endl;
+		return EXIT_FAILURE;
+	}
+}
+
+void engine::engineLoop()
+{
 
 	using clock = std::chrono::high_resolution_clock;
 
@@ -51,6 +65,7 @@ int main() {
 	game_state current_state;
 	game_state previous_state;
 
+
 	while (!quit_game)
 	{
 		auto delta_time = clock::now() - time_start;
@@ -60,7 +75,8 @@ int main() {
 		quit_game = handle_events();
 
 		// update game logic as lag permits
-		while (lag >= timestep) {
+		while (lag >= timestep)
+		{
 			lag -= timestep;
 
 			previous_state = current_state;
@@ -83,4 +99,108 @@ int main() {
 	// when main loop exits, destroy window then terminate
 	glfwDestroyWindow(window);
 	glfwTerminate();
+}
+
+void engine::initWindow()
+{
+	// init GLFW
+	glfwInit();
+	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+	window = glfwCreateWindow(width, height, "Krakow", nullptr, nullptr);
+}
+
+void engine::initVulkan()
+{
+	createInstance();
+}
+
+
+void engine::createInstance()
+{
+	if (enableValidationLayers && !checkValidationLayerSupport())
+	{
+		throw std::runtime_error("validation layers requested, but not available!");
+	}
+
+
+	VkApplicationInfo appInfo = {};
+	appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
+	appInfo.pApplicationName = "Krak Game";
+	appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
+	appInfo.pEngineName = "Krak";
+	appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
+	appInfo.apiVersion = VK_API_VERSION_1_0;
+
+	VkInstanceCreateInfo createInfo = {};
+	createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+	createInfo.pApplicationInfo = &appInfo;
+
+	auto extensions = getRequiredExtensions();
+	createInfo.enabledExtensionCount = extensions.size();
+	createInfo.ppEnabledExtensionNames = extensions.data();
+
+	if (enableValidationLayers)
+	{
+		createInfo.enabledLayerCount = validationLayers.size();
+		createInfo.ppEnabledLayerNames = validationLayers.data();
+	}
+	else
+	{
+		createInfo.enabledLayerCount = 0;
+	}
+
+	if (vkCreateInstance(&createInfo, nullptr, instance) != VK_SUCCESS)
+	{
+		throw std::runtime_error("failed to create instance!");
+	}
+}
+bool engine::checkValidationLayerSupport()
+{
+	uint32_t layerCount;
+	vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
+
+	std::vector<VkLayerProperties> availableLayers(layerCount);
+	vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
+
+	for (const char* layerName : validationLayers)
+	{
+		bool layerFound = false;
+
+		for (const auto& layerProperties : availableLayers)
+		{
+			if (strcmp(layerName, layerProperties.layerName) == 0)
+			{
+				layerFound = true;
+				break;
+			}
+		}
+
+		if (!layerFound)
+		{
+			return false;
+		}
+	}
+
+	return true;
+
+}
+std::vector<const char*> engine::getRequiredExtensions()
+{
+	std::vector<const char*> extensions;
+
+	unsigned int glfwExtensionCount = 0;
+	const char** glfwExtensions;
+	glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
+
+	for (unsigned int i = 0; i < glfwExtensionCount; i++)
+	{
+		extensions.push_back(glfwExtensions[i]);
+	}
+
+	if (enableValidationLayers)
+	{
+		extensions.push_back(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
+	}
+
+	return extensions;
 }

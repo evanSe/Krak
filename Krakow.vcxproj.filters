@@ -30,6 +30,9 @@
     <ClCompile Include="src\engine\ultils\buffer.h">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\ultils\instance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine\engine.h">
@@ -69,6 +72,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\ultils\texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\ultils\instance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\ultils\noncpy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

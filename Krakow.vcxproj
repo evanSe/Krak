@@ -22,6 +22,7 @@
     <ClCompile Include="src\engine\engine.cpp" />
     <ClCompile Include="src\engine\pch.cpp" />
     <ClCompile Include="src\engine\ultils\buffer.h" />
+    <ClCompile Include="src\engine\ultils\instance.cpp" />
     <ClCompile Include="src\engine\window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -31,7 +32,9 @@
     <ClInclude Include="src\engine\ultils\commandBuffer.h" />
     <ClInclude Include="src\engine\ultils\frameBuffer.h" />
     <ClInclude Include="src\engine\ultils\image.h" />
+    <ClInclude Include="src\engine\ultils\instance.h" />
     <ClInclude Include="src\engine\ultils\mesh.h" />
+    <ClInclude Include="src\engine\ultils\noncpy.h" />
     <ClInclude Include="src\engine\ultils\pipeline.h" />
     <ClInclude Include="src\engine\ultils\queue.h" />
     <ClInclude Include="src\engine\ultils\renderPass.h" />

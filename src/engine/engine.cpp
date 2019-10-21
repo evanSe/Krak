@@ -89,14 +89,14 @@ void engine::engineLoop()
 
 		render(interpolated_state);
 
-		// if window wants to close, exit game
+		// if a window wants to close, exit game
 		if (glfwWindowShouldClose(window))
 		{
 			quit_game = true;
 		}
 	}
 
-	// when main loop exits, destroy window then terminate
+	// when main loop exits, destroy window, then terminate
 	glfwDestroyWindow(window);
 	glfwTerminate();
 }
@@ -119,7 +119,7 @@ void engine::createInstance()
 {
 	if (enableValidationLayers && !checkValidationLayerSupport())
 	{
-		throw std::runtime_error("validation layers requested, but not available!");
+		throw std::runtime_error("Validation layers requested, but not available!");
 	}
 
 
@@ -151,7 +151,7 @@ void engine::createInstance()
 
 	if (vkCreateInstance(&createInfo, nullptr, instance) != VK_SUCCESS)
 	{
-		throw std::runtime_error("failed to create instance!");
+		throw std::runtime_error("Failed to create instance!");
 	}
 }
 bool engine::checkValidationLayerSupport()
